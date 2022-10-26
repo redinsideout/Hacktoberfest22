@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void calc_prefix_sum(vector<int> v,vector<int> &p_sum)
+{   p_sum[0] = 0;
+    p_sum[1] = v[0];
+    for(int i = 2;i<=v.size();++i){
+        p_sum[i] = p_sum[i-1] + v[i-1];
+    }
+}
+
+int main()
+{
+ 
+    int n;
+    cin>>n;
+
+    vector<int> v;
+    for(int i = 0;i<n;++i){
+        int x;
+        cin>>x;
+        v.push_back(x);
+    }
+
+    vector<int> p_sum(n+1,0);
+    calc_prefix_sum(v,p_sum);
+    for(auto vals: p_sum){
+        cout<<vals<<" ";
+    }
+    cout<<"\n";
+    int q;
+    cin>>q;
+    while(q--)
+    {
+        int l;
+        int r;
+        cin>>l>>r;
+        cout<<p_sum[r] - p_sum[l-1];
+    }
+
+
+    return 0;
+}
